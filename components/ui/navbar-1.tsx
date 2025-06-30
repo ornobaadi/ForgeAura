@@ -3,6 +3,7 @@
 import * as React from "react"
 import { useState } from "react"
 import { motion, AnimatePresence } from "motion/react"
+import { ThemeToggleButton } from "@/components/ui/theme-toggle"
 import { Menu, X } from "lucide-react"
 import { onAuthStateChanged, User } from "firebase/auth"
 import { auth } from "@/lib/firebase"
@@ -24,7 +25,11 @@ const Navbar1 = () => {
 
   return (
     <div className="flex justify-center w-full py-6 px-4">
-      <div className="flex items-center justify-between px-6 py-3 bg-white rounded-full shadow-lg w-full max-w-5xl relative z-10">
+      <div className="flex items-center justify-between px-6 py-3 
+        bg-white/80 dark:bg-[#18181b]/80 
+        border border-gray-200 dark:border-gray-700 
+        text-gray-900 dark:text-gray-100 
+        backdrop-blur-md rounded-full shadow-lg w-full max-w-5xl relative z-10 transition-colors">
         <div className="flex items-center">
           <motion.div
             className="w-8 h-8 mr-6"
@@ -43,6 +48,7 @@ const Navbar1 = () => {
               </defs>
             </svg>
           </motion.div>
+          
         </div>
         
           {/* Desktop Navigation */}
@@ -55,21 +61,16 @@ const Navbar1 = () => {
                 transition={{ duration: 0.3 }}
                 whileHover={{ scale: 1.05 }}
               >
-                <Link href={item.href} className="text-sm text-gray-900 hover:text-gray-600 transition-colors font-medium">
+                <Link href={item.href} className="text-sm text-gray-900 dark:text-gray-100 hover:text-gray-600 dark:hover:text-gray-300 transition-colors font-medium">
                   {item.label}
                 </Link>
               </motion.div>
             ))}
           </nav>
 
-        {/* Desktop CTA Button */}
-        <motion.div
-          className="hidden md:block"
-          initial={{ opacity: 0, x: 20 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.3, delay: 0.2 }}
-          whileHover={{ scale: 1.05 }}
-        >
+        {/* Desktop CTA Button + Theme Toggle */}
+        <div className="hidden md:flex items-center space-x-4 text-gray-900 dark:text-gray-100">
+          <ThemeToggleButton />
           {user ? (
             <UserAvatarMenu
               displayName={user.displayName || "User"}
@@ -79,12 +80,12 @@ const Navbar1 = () => {
           ) : (
             <Link
               href="/login"
-              className="inline-flex items-center justify-center px-5 py-2 text-sm text-white bg-black rounded-full hover:bg-gray-800 transition-colors"
+              className="inline-flex items-center justify-center px-5 py-2 text-sm text-white bg-black dark:bg-gray-900 rounded-full hover:bg-gray-800 dark:hover:bg-gray-700 transition-colors"
             >
               Get Started
             </Link>
           )}
-        </motion.div>
+        </div>
 
         {/* Mobile Menu Button */}
         <motion.button className="md:hidden flex items-center" onClick={toggleMenu} whileTap={{ scale: 0.9 }}>
@@ -96,7 +97,7 @@ const Navbar1 = () => {
       <AnimatePresence>
         {isOpen && (
           <motion.div
-            className="fixed inset-0 bg-white z-50 pt-24 px-6 md:hidden"
+            className="fixed inset-0 bg-white dark:bg-[#18181b] z-50 pt-24 px-6 md:hidden transition-colors"
             initial={{ opacity: 0, x: "100%" }}
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: "100%" }}
@@ -121,7 +122,7 @@ const Navbar1 = () => {
                   transition={{ delay: i * 0.1 + 0.1 }}
                   exit={{ opacity: 0, x: 20 }}
                 >
-                  <Link href={item === "Home" ? "/" : item === "Pricing" ? "/pricing" : item === "Docs" ? "/docs" : "/projects"} className="text-base text-gray-900 font-medium" onClick={toggleMenu}>
+                  <Link href={item === "Home" ? "/" : item === "Pricing" ? "/pricing" : item === "Docs" ? "/docs" : "/projects"} className="text-base text-gray-900 dark:text-gray-100 font-medium transition-colors" onClick={toggleMenu}>
                     {item}
                   </Link>
                 </motion.div>
@@ -143,7 +144,7 @@ const Navbar1 = () => {
                 ) : (
                   <Link
                     href="/login"
-                    className="inline-flex items-center justify-center w-full px-5 py-3 text-base text-white bg-black rounded-full hover:bg-gray-800 transition-colors "
+                    className="inline-flex items-center justify-center w-full px-5 py-3 text-base text-white bg-black dark:bg-gray-900 rounded-full hover:bg-gray-800 dark:hover:bg-gray-700 transition-colors "
                     onClick={toggleMenu}
                   >
                     Get Started

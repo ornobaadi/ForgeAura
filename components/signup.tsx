@@ -252,7 +252,7 @@ export default function Signup() {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen">
+    <div className="flex items-center justify-center">
       <div className="flex flex-1 flex-col justify-center px-4 py-10 lg:px-6">
         <div className="sm:mx-auto sm:w-full sm:max-w-md">
           <Logo
@@ -329,7 +329,7 @@ export default function Signup() {
                 />
                 <button
                   type="button"
-                  className="absolute right-2 top-8 text-xs text-gray-500"
+                  className="absolute right-2 top-10 text-xs text-gray-500"
                   onClick={() => setShowPassword(v => !v)}
                   tabIndex={-1}
                 >
@@ -358,7 +358,7 @@ export default function Signup() {
                 />
                 <button
                   type="button"
-                  className="absolute right-2 top-8 text-xs text-gray-500"
+                  className="absolute right-2 top-10 text-xs text-gray-500"
                   onClick={() => setShowConfirmPassword(v => !v)}
                   tabIndex={-1}
                 >

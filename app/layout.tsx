@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Bricolage_Grotesque } from "next/font/google";
 import "./globals.css";
 import { Navbar1 } from "@/components/ui/navbar-1";
+import { ThemeProvider } from 'next-themes';
 
 
 const bricolage = Bricolage_Grotesque({
@@ -17,13 +18,15 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body
         className={`${bricolage.variable} font-sans antialiased`}
         style={{ fontFamily: 'var(--font-bricolage), sans-serif' }}
       >
-        <Navbar1 />
-        {children}
+        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+          <Navbar1 />
+          {children}
+        </ThemeProvider>
       </body>
     </html>
   );
